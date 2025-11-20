@@ -1,0 +1,61 @@
+{
+  "fallback": {
+    "description": "Loading translations..."
+  },
+
+  "navbar": {
+    "home": "Home",
+    "about": "About Me",
+    "experience": "Experience",
+    "technologies": "Technologies",
+    "project": "Projects",
+    "contact": "Contact",
+    "alt": {
+      "home": "Go to section home",
+      "about": "Learn more about my backend journey",
+      "experience": "View my backend development experience",
+      "technologies": "Explore backend technologies I use",
+      "project": "See my backend projects",
+      "contact": "Contact me"
+    }
+  },
+
+  "meta": {
+    "title": "Jerry Hdez | Portfolio",
+    "description": "Explore Jerry's expertise in Java, Spring Boot, microservices, and scalable backend architecture."
+  },
+
+  "aria": {
+    "mainNav": "Main navigation",
+    "languageSwitcher": "Change site language",
+    "menuToggle": "Mobile menu and language selector",
+    "logo": "Jerry.dev logo linking to home"
+  },
+
+  "sections": {
+    "home": {
+      "heading": "Welcome to Jerry.dev",
+      "description": "Building robust, scalable backend systems with Java, Spring Boot, and microservices architecture."
+    },
+    "about": {
+      "heading": "About Me",
+      "description": "I’m a backend developer specializing in Java, Spring Boot, RESTful APIs, and distributed systems."
+    },
+    "experience": {
+      "heading": "Experience",
+      "description": "Explore my journey in backend development, from enterprise Java applications to cloud-native microservices."
+    },
+    "technologies": {
+      "heading": "Technologies",
+      "description": "Languages, frameworks, and tools I use to build secure, scalable, and maintainable backend systems."
+    },
+    "project": {
+      "heading": "Projects",
+      "description": "A showcase of backend projects including microservices, API gateways, and cloud deployments."
+    },
+    "contact": {
+      "heading": "Contact Me",
+      "description": "Let’s collaborate — reach out to discuss backend solutions, system architecture, or technical consulting."
+    }
+  }
+}
