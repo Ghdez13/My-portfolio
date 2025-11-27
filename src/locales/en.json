@@ -20,6 +20,15 @@
     }
   },
 
+"footer": {
+  "tooltipLogo": "Go back to Home",
+  "tooltipEmail": "Contact me",
+  "tooltipGitHub": "Check out my GitHub",
+  "tooltipLinkedIn": "Visit my LinkedIn",
+  "language":"Translate to:",
+  "developer": "Designed & Developed by"
+},
+
   "meta": {
     "title": "Jerry Hdez | Portfolio",
     "description": "Explore Jerry's expertise in Java, Spring Boot, microservices, and scalable backend architecture."

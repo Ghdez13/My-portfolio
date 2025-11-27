@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export function Navbar() {
@@ -85,19 +86,20 @@ export function Navbar() {
   return (
     <header className="fixed text-(--color-text-navbar) top-0 left-0 w-full z-50 bg-(--color-bg-navbarAndFooter) shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <a
-          href="/"
+        {/* Logo */}
+        <Link
+          to="/"
           aria-label={t("aria.logo")}
           className="inline-block focus:outline-none
-             focus-visible:ring-2 focus-visible:ring-[#d2ad4b]
-             focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg-navbarAndFooter)"
+     focus-visible:ring-2 focus-visible:ring-[#d2ad4b]
+     focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg-navbarAndFooter)"
         >
           <img
             src="/logo/logo.webp"
             alt="Jerry.dev logo"
-            className="h-8 w-auto sm:h-10 transition-transform duration-300 hover:scale-105"
+            className="h-12 lg:h-15 w-auto transition-transform duration-300 hover:scale-105"
           />
-        </a>
+        </Link>
 
         {/* Desktop menu */}
         <nav className="hidden md:flex gap-6" aria-label={t("aria.mainNav")}>

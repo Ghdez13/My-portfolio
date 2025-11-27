@@ -19,6 +19,16 @@
       "contact": "Contáctame"
     }
   },
+
+"footer": {
+  "tooltipLogo": "Volver a Home",
+  "tooltipEmail": "Contáctame",
+  "tooltipGitHub": "Echa un vistazo a mi GitHub",
+  "tooltipLinkedIn": "Visita mi LinkedIn",
+  "language":"Tradúcelo a:",
+  "developer":"Diseñado y desarrollado por"
+},
+
   "meta": {
     "title": "Jerry Hdez | Portfolio",
     "description": "Explora la experiencia de Jerry en Java, Spring Boot, microservicios y arquitectura backend escalable."
