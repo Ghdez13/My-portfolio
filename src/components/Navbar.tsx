@@ -105,8 +105,9 @@ export function Navbar() {
             to="/"
             aria-label={t("aria.logo")}
             className="inline-block focus:outline-none
-     focus-visible:ring-2 focus-visible:ring-[#d2ad4b]
-     focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg-navbarAndFooter)"
+      focus-visible:ring-2 focus-visible:ring-[#d2ad4b]
+      focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg-navbarAndFooter)
+      rounded-md"
           >
             <img
               src="/logo/logo.webp"

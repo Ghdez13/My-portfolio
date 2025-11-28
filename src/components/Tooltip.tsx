@@ -1,4 +1,4 @@
-import { useId, type ReactNode, useEffect, useRef,useState } from "react";
+import { useId, type ReactNode, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const Tooltip = ({
@@ -16,7 +16,6 @@ export const Tooltip = ({
 
   // Clear sticky states when tab/window regains focus
   useEffect(() => {
-    
     const handleFocus = () => {
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur();
@@ -32,11 +31,11 @@ export const Tooltip = ({
   }, []);
 
   // Hide tooltip immediately on click or Enter/Space key
-const handleClick = () => {
-  if (parentRef.current) {
-    parentRef.current.dispatchEvent(new Event("mouseleave"));
-  }
-};
+  const handleClick = () => {
+    if (parentRef.current) {
+      parentRef.current.dispatchEvent(new Event("mouseleave"));
+    }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -57,10 +56,9 @@ const handleClick = () => {
       onBlur={() => setVisible(false)} // hide tooltip on keyboard blur
       onClick={handleClick} // hide tooltip on click
       onKeyDown={handleKeyDown} // hide tooltip on Enter/Space key
-      tabIndex={0} // make div focusable for keyboard navigation
+      tabIndex={-1} // make div focusable for keyboard navigation
     >
       {children} {/* render the child element(s) inside the tooltip wrapper */}
-
       {/* Tooltip element, only rendered when visible */}
       {visible && (
         <div

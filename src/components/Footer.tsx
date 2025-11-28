@@ -79,7 +79,7 @@ export function Footer() {
             <Tooltip labelKey="footer.tooltipEmail">
               <a
                 href="mailto:gerardo-hernandez03@outlook.com"
-                className="hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
+                className="hover:wiggle hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
               >
                 <img
                   src="/src/assets/icons/email.webp"
