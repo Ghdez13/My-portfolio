@@ -86,7 +86,7 @@ export function Navbar() {
     document.addEventListener("mousedown", handleOutside);
     document.addEventListener("touchstart", handleOutside);
     document.addEventListener("keydown", handleEsc);
-    document.addEventListener("focusin", handleFocusIn); // ✅ new listener
+    document.addEventListener("focusin", handleFocusIn);
 
     return () => {
       document.removeEventListener("mousedown", handleOutside);

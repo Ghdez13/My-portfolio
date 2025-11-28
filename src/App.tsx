@@ -64,7 +64,14 @@ function App() {
       {/* Footer Section */}
       <Footer />
 
-      <ToastContainer position="top-right" autoClose={800} />
+<ToastContainer
+  toastClassName="custom-toast"
+  progressClassName="custom-progress-bar"
+  position="top-right"
+  autoClose={1000}
+  hideProgressBar={false}
+  closeOnClick
+/>
     </div>
   );
 }

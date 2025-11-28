@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Tooltip } from "./Tooltip";
+import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import GitHubIcon from "../assets/icons/github.svg?react";
 import LinkedInIcon from "../assets/icons/linkedin.svg?react";
@@ -132,8 +133,8 @@ export function Footer() {
               id="lang"
               onClick={() => setOpen((prev) => !prev)}
               className="bg-transparent border border-(--color-hover-text-navbarAndFooter) text-(--color-text-navbar)
-                 px-3 py-1 rounded-md text-sm cursor-pointer w-30 flex justify-between items-center
-                 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] relative z-20"
+     px-3 py-1 rounded-md text-sm cursor-pointer w-30 flex justify-between items-center
+     focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] relative z-20"
             >
               {LANGUAGES.find((l) => l.code === i18n.language)?.name}
               <span className="ml-2 text-(--color-text-secondary)">
@@ -181,9 +182,24 @@ export function Footer() {
                         }}
                         transition={{ duration: 0.2 }}
                         onClick={() => {
+                          //Change language
                           i18n.changeLanguage(lang.code);
                           localStorage.setItem("preferredLanguage", lang.code);
                           setOpen(false);
+
+                          // Fire toast on selection
+                          const activationMessages: Record<
+                            "es" | "en" | "fr",
+                            string
+                          > = {
+                            es: "Español activado",
+                            en: "English activated",
+                            fr: "Français activé",
+                          };
+
+                          toast.success(
+                            activationMessages[lang.code as "es" | "en" | "fr"]
+                          );
                         }}
                         className="px-3 py-2 cursor-pointer hover:bg-[#fbbd35]/10 select-none"
                       >
