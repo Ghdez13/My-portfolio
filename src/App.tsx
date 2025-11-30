@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { SEO } from "./components/SEO";
@@ -11,16 +12,28 @@ import { Projects } from "./views/Projects";
 import { Contact } from "./views/Contact";
 
 function App() {
+  const [theme, setTheme] = useState<"light" | "dark">(
+    (localStorage.getItem("theme") as "light" | "dark") || "light"
+  );
+
+  const toggleTheme = () => {
+    document.documentElement.classList.add("theme-transition");
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setTimeout(() => {
+      document.documentElement.classList.remove("theme-transition");
+    }, 350);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <SEO />
 
-      <Navbar />
+      {/* Pass theme and toggleTheme here */}
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       <main className="pt-20 flex-1 w-full" role="main">
         <div className="w-full max-w-[1400px] mx-auto px-6 space-y-24">
-          {/* Render sections in scroll order */}
-          <Home />
+           <Home theme={theme} />
           <About />
           <Experience />
           <Technologies />

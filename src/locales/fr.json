@@ -44,8 +44,9 @@
   },
   "sections": {
     "home": {
-      "heading": "Bienvenue sur Jerry.dev",
-      "description": "Création de systèmes backend robustes et évolutifs avec Java, Spring Boot et architecture microservices."
+      "introStart": "Salut, je suis",
+"heroTagline": "Backend par conception, curieux à chaque couche.",
+"description": "Je construis des systèmes backend évolutifs (principalement en Java) et je me développe intentionnellement vers le frontend pour créer de meilleures expériences utilisateur et des produits numériques plus complets."
     },
     "about": {
       "heading": "À propos de moi",

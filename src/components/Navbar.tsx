@@ -3,63 +3,20 @@ import { useTranslation } from "react-i18next";
 import { Tooltip } from "./Tooltip";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { ThemeToggleButton } from "./ThemeToggleButton";
 
-export function Navbar() {
+interface NavbarProps {
+  theme: "light" | "dark";
+  toggleTheme: () => void;
+}
+
+export function Navbar({ theme, toggleTheme }: NavbarProps) {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
   const [activeSection, setActiveSection] = useState("home");
-
-  // Theme state
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
   const headerRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    document.documentElement.classList.add("theme-ready");
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  function toggleTheme() {
-    document.documentElement.classList.add("theme-transition");
-
-    setTheme(theme === "dark" ? "light" : "dark");
-
-    setTimeout(() => {
-      document.documentElement.classList.remove("theme-transition");
-    }, 350);
-  }
-
-  // Apply scroll style only when mobile menu is closed
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!isOpen) {
-        if (window.scrollY > 10) {
-          headerRef.current?.classList.add("navbar-scrolled");
-        } else {
-          headerRef.current?.classList.remove("navbar-scrolled");
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isOpen]);
-
-  // Force original solid navbar when mobile menu is open
-  useEffect(() => {
-    if (isOpen) {
-      headerRef.current?.classList.add("mobile-open");
-      headerRef.current?.classList.remove("navbar-scrolled"); // por si el scroll lo tenía activo
-    } else {
-      headerRef.current?.classList.remove("mobile-open");
-    }
-  }, [isOpen]);
 
   const MENU_ITEMS = [
     { id: "home", path: "#home", label: "navbar.home" },
@@ -77,15 +34,40 @@ export function Navbar() {
     { code: "fr", label: "FR", name: "Français" },
   ] as const;
 
-  // Lock scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
+    document.documentElement.classList.add("theme-ready");
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  // Scroll effects
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!isOpen) {
+        if (window.scrollY > 10) {
+          headerRef.current?.classList.add("navbar-scrolled");
+        } else {
+          headerRef.current?.classList.remove("navbar-scrolled");
+        }
+      }
     };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isOpen]);
 
-  // Observe sections to update hash and focus navbar link on enter viewport
+  useEffect(() => {
+    if (isOpen) {
+      headerRef.current?.classList.add("mobile-open");
+      headerRef.current?.classList.remove("navbar-scrolled");
+    } else {
+      headerRef.current?.classList.remove("mobile-open");
+    }
+  }, [isOpen]);
+
+  // IntersectionObserver for active section
   useEffect(() => {
     const sections = MENU_ITEMS.map((item) =>
       document.getElementById(item.id)
@@ -97,18 +79,10 @@ export function Navbar() {
           if (entry.isIntersecting) {
             history.replaceState(null, "", `#${entry.target.id}`);
             setActiveSection(entry.target.id);
-
-            const menuLink = document.querySelector(
-              `nav a[href="#${entry.target.id}"]`
-            );
-            (menuLink as HTMLElement)?.focus();
           }
         });
       },
-      {
-        threshold: 0.6,
-        rootMargin: "-70px 0px -30% 0px",
-      }
+      { threshold: 0.6, rootMargin: "-70px 0px -30% 0px" }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -116,22 +90,23 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   // Handle outside click, touch, tab key and Escape key
   useEffect(() => {
     const handleOutside = (event: MouseEvent | TouchEvent) => {
       if (!modalRef.current) return;
       if (toggleButtonRef.current?.contains(event.target as Node)) return;
-      if (!modalRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
+      if (!modalRef.current.contains(event.target as Node)) setIsOpen(false);
     };
-
     const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
+      if (event.key === "Escape") setIsOpen(false);
     };
-
     const handleFocusIn = (event: FocusEvent) => {
       if (!modalRef.current) return;
       if (
@@ -141,24 +116,73 @@ export function Navbar() {
         setIsOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleOutside);
     document.addEventListener("touchstart", handleOutside);
     document.addEventListener("keydown", handleEsc);
     document.addEventListener("focusin", handleFocusIn);
-
     return () => {
       document.removeEventListener("mousedown", handleOutside);
       document.removeEventListener("touchstart", handleOutside);
       document.removeEventListener("keydown", handleEsc);
-      document.removeEventListener("focusin", handleFocusIn); // cleanup
+      document.removeEventListener("focusin", handleFocusIn);
     };
   }, []);
+
+  const renderMenuItems = (isMobile = false) =>
+    MENU_ITEMS.map(({ id, path, label }) => {
+      const isActive = activeSection === id;
+      return (
+        <a
+          key={id}
+          href={path}
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById(id)?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+            setActiveSection(id);
+            if (isMobile) setIsOpen(false);
+          }}
+          aria-label={t(`navbar.alt.${id}`)}
+          className={`relative inline-block w-fit md:text-sm lg:text-xl xl:text-2xl font-semibold transition
+       hover:after:w-full focus:outline-none focus-visible:after:w-full
+       after:absolute after:-bottom-1 after:left-0 after:h-1
+       after:bg-(--color-hover-text-navbarAndFooter) after:w-0
+       after:transition-all after:duration-300
+            ${isActive ? "after:w-full text-(--color-text-navbar)" : "text-(--color-text-navbar)"}`}
+        >
+          {t(label)}
+        </a>
+      );
+    });
+
+  const renderLanguages = (isMobile = false) =>
+    LANGUAGES.map(({ code, label }) => (
+      <button
+        key={code}
+        onClick={async () => {
+          await i18n.changeLanguage(code);
+          localStorage.setItem("preferredLanguage", code);
+          const activationMessages: Record<string, string> = {
+            es: "Español activado",
+            fr: "Français activé",
+            en: "English activated",
+          };
+          toast.success(activationMessages[code]);
+          if (isMobile) setIsOpen(false);
+        }}
+        className={`relative inline-block text-sm lg:text-2xl transition hover:after:w-full focus:outline-none focus-visible:after:w-full after:absolute after:-bottom-1 after:left-0 after:h-1 after:bg-[#d2ad4b] after:w-0 after:transition-all after:duration-300
+          ${i18n.language === code ? "after:w-full text-(--color-text-navbar)" : "text-(--color-text-navbar)"}`}
+      >
+        {label}
+      </button>
+    ));
 
   return (
     <header
       ref={headerRef}
-      className="fixed text-(--color-text-navbar) top-0 left-0 w-full z-50 bg-(--color-bg-navbarAndFooter) shadow-md navbar-scroll"
+      className="fixed top-0 left-0 w-full z-50 bg-(--color-bg-navbarAndFooter) text-(--color-text-navbar) shadow-md navbar-scroll"
     >
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
@@ -166,16 +190,14 @@ export function Navbar() {
           <Link
             to="/"
             onClick={(e) => {
-              e.preventDefault(); // prevent route navigation
-              document
-                .getElementById("home") // find your home section
-                ?.scrollIntoView({ block: "start", behavior: "smooth" }); // scroll to its start
+              e.preventDefault();
+              document.getElementById("home")?.scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+              });
             }}
             aria-label={t("aria.logo")}
-            className="inline-block focus:outline-none
-      focus-visible:ring-2 focus-visible:ring-[#d2ad4b]
-      focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg-navbarAndFooter)
-      rounded-md"
+            className="inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg-navbarAndFooter) rounded-md"
           >
             <img
               src="/logo/logo.webp"
@@ -187,43 +209,16 @@ export function Navbar() {
 
         {/* Desktop menu */}
         <nav className="hidden md:flex gap-6" aria-label={t("aria.mainNav")}>
-          {MENU_ITEMS.map(({ id, path, label }) => {
-            // Detect if current scroll-section is the same as menu hash
-            const isActive = activeSection === id;
-
-            const handleClick = (e: React.MouseEvent) => {
-              e.preventDefault(); // avoid navigation jump
-              const section = document.getElementById(id);
-              section?.scrollIntoView({ behavior: "smooth", block: "start" });
-              setActiveSection(id);
-            };
-
-            return (
-              <a
-                key={id}
-                href={path}
-                onClick={handleClick}
-                aria-label={t(`navbar.alt.${id}`)}
-                className={`
-        relative text-l lg:text-2xl transition focus:outline-none
-        hover:after:w-full focus-visible:after:w-full
-        after:absolute after:-bottom-1 after:left-0 after:h-1
-        after:bg-(--color-hover-text-navbarAndFooter) after:w-0
-        after:transition-all after:duration-300
-        ${
-          isActive
-            ? "after:w-full text-(--color-text-navbar)"
-            : "text-(--color-text-navbar)"
-        }
-      `}
-              >
-                {t(label)}
-              </a>
-            );
-          })}
+          {renderMenuItems()}
         </nav>
 
-        {/* Mobile toggle */}
+        {/* Desktop languages + theme */}
+        <div className="hidden md:flex items-center gap-3">
+          {renderLanguages()}
+          <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
+        </div>
+
+        {/* Mobile menu toggle */}
         <div className="relative flex flex-col items-center ">
           <button
             ref={toggleButtonRef}
@@ -253,164 +248,22 @@ export function Navbar() {
             {isOpen ? t("navbar.menuClose") : t("navbar.menuOpen")}
           </span>
         </div>
-
-        {/* Desktop language selector */}
-        <div
-          className="hidden md:flex items-center gap-3"
-          aria-label={t("aria.languageSwitcher")}
-        >
-          {LANGUAGES.map(({ code, label }) => (
-            <button
-              key={code}
-              onClick={async () => {
-                await i18n.changeLanguage(code);
-                localStorage.setItem("preferredLanguage", code);
-
-                const activationMessages: Record<string, string> = {
-                  es: "Español activado",
-                  fr: "Français activé",
-                  en: "English activated",
-                };
-
-                toast.success(activationMessages[code]);
-              }}
-              className={`relative inline-block text-sm lg:text-2xl transition hover:after:w-full focus:outline-none focus-visible:after:w-full after:absolute after:-bottom-1 after:left-0 after:h-1 after:bg-[#d2ad4b] after:w-0 after:transition-all after:duration-300 ${
-                i18n.language === code
-                  ? "after:w-full text-(--color-text-navbar)"
-                  : "text-(--color-text-navbar)"
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-          {/* Theme toggle */}
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className={`flex flex-col items-center justify-center w-10 h-10 rounded-full transition-all duration-300
-              bg-black text-gray-300 
-              shadow-[inset_2px_2px_4px_rgba(255,255,255,0.1),inset_-2px_-2px_4px_rgba(0,0,0,0.7),0_4px_6px_rgba(0,0,0,0.8)]
-              active:shadow-[inset_4px_4px_6px_rgba(0,0,0,0.9),inset_-2px_-2px_4px_rgba(255,255,255,0.05)] 
-              `}
-          >
-            {/* Power symbol */}
-            <span className="text-lg font-bold">⏻</span>
-
-            {/* Status line */}
-            <span
-              className={`mt-0.5 h-0.5 w-4 rounded-sm transition-colors duration-300
-                ${
-                  theme === "dark"
-                    ? "bg-transparent"
-                    : "bg-green-500 shadow-[0_0_6px_#22c55e]"
-                }`}
-            />
-          </button>
-        </div>
       </div>
 
-      {/* Mobile menu modal */}
+      {/* Mobile menu */}
       {isOpen && (
-        <div
-          className="md:hidden fixed inset-0 z-50 flex"
-          aria-label={t("aria.menuToggle")}
-        >
-          {/* Backdrop */}
+        <div className="md:hidden fixed inset-0 z-50 flex">
+           {/* Backdrop */}
           <div className="flex-1 bg-black/50" />
-
           {/* Drawer */}
           <div
             ref={modalRef}
             className="w-2/3 max-w-sm bg-(--color-bg-navbarAndFooter) h-full shadow-lg p-6 flex flex-col gap-6 text-lg relative pt-18"
           >
-            {/* Menu mobile items */}
-            {MENU_ITEMS.map(({ id, path, label }) => {
-              // Active if hash matches the menu path
-              const isActive = activeSection === id;
-
-              const handleClick = (e: React.MouseEvent) => {
-                e.preventDefault();
-                const section = document.getElementById(id);
-                section?.scrollIntoView({ behavior: "smooth", block: "start" });
-                setActiveSection(id);
-                setIsOpen(false); // Close mobile drawer AFTER scrolling
-              };
-
-              return (
-                <a
-                  key={id}
-                  href={path}
-                  aria-label={t(`navbar.alt.${id}`)}
-                  onClick={handleClick} // trigger scroll + close menu
-                  className={`
-        relative inline-block w-fit text-lg font-semibold transition focus:outline-none
-        hover:after:w-full focus-visible:after:w-full
-        after:absolute after:-bottom-1 after:left-0 after:h-1
-        after:bg-(--color-hover-text-navbarAndFooter) after:w-0
-        after:transition-all after:duration-300
-        ${
-          isActive
-            ? "after:w-full text-(--color-text-navbar)"
-            : "text-(--color-text-navbar)"
-        }
-      `}
-                >
-                  {t(label)}
-                </a>
-              );
-            })}
-
-            {/* Mobile language selector */}
+            {renderMenuItems(true)}
             <div className="flex justify-center space-x-4 pt-6 border-t border-gray-200">
-              {LANGUAGES.map(({ code, label }) => (
-                <button
-                  key={code}
-                  onClick={async () => {
-                    await i18n.changeLanguage(code);
-                    localStorage.setItem("preferredLanguage", code);
-
-                    const activationMessages: Record<string, string> = {
-                      es: "Español activado",
-                      fr: "Français activé",
-                      en: "English activated",
-                    };
-
-                    toast.success(activationMessages[code]);
-
-                    setIsOpen?.(false);
-                  }}
-                  className={`relative inline-block text-lg transition hover:after:w-full focus:outline-none focus-visible:after:w-full after:absolute after:-bottom-1 after:left-0 after:h-1 after:bg-[#d2ad4b] after:w-0 after:transition-all after:duration-300 ${
-                    i18n.language === code
-                      ? "after:w-full text-(--color-text-navbar)"
-                      : "text-(--color-text-navbar)"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-              {/* Mobile theme toggle */}
-              <button
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className={`flex flex-col items-center justify-center w-10 h-10 rounded-full transition-all duration-300
-              bg-black text-gray-300 
-              shadow-[inset_2px_2px_4px_rgba(255,255,255,0.1),inset_-2px_-2px_4px_rgba(0,0,0,0.7),0_4px_6px_rgba(0,0,0,0.8)]
-              active:shadow-[inset_4px_4px_6px_rgba(0,0,0,0.9),inset_-2px_-2px_4px_rgba(255,255,255,0.05)] 
-              `}
-              >
-                {/* Power symbol */}
-                <span className="text-lg font-bold">⏻</span>
-
-                {/* Status line */}
-                <span
-                  className={`mt-0.5 h-0.5 w-4 rounded-sm transition-colors duration-300
-                ${
-                  theme === "dark"
-                    ? "bg-transparent"
-                    : "bg-green-500 shadow-[0_0_6px_#22c55e]"
-                }`}
-                />
-              </button>
+              {renderLanguages(true)}
+              <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
             </div>
           </div>
         </div>

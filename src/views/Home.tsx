@@ -1,9 +1,68 @@
+import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
+import { SectionDivider } from "../components/SectionDivider";
 
-export const Home = () => (
-  <section id="home" aria-labelledby="home-heading" className="scroll-mt-20">
-    <h1 id="home-heading" className="text-3xl font-bold">Home</h1>
-    <p className="text-(--color-text-primary)">
-      Explore Jerry's expertise in Java, Spring Boot, microservices, and scalable backend architecture.
-    </p>
-  </section>
-);
+import profileLight from "../assets/images/profileLight.webp";
+import profileDark from "../assets/images/profileDark.webp";
+import profileLightMobile from "../assets/images/profileLightMobile.webp";
+import profileDarkMobile from "../assets/images/profileDarkMobile.webp";
+
+interface HomeProps {
+  theme: "light" | "dark";
+}
+
+export function Home({ theme }: HomeProps) {
+  const { t } = useTranslation();
+  const [profileImg, setProfileImg] = useState(profileLightMobile); // default
+
+  useEffect(() => {
+    // Pick the right image based on theme and screen size
+    const isMobile = window.innerWidth <= 768;
+    if (theme === "dark") {
+      setProfileImg(isMobile ? profileDarkMobile : profileDark);
+    } else {
+      setProfileImg(isMobile ? profileLightMobile : profileLight);
+    }
+
+    const handleResize = () => {
+      const isMobileResize = window.innerWidth <= 768;
+      if (theme === "dark") {
+        setProfileImg(isMobileResize ? profileDarkMobile : profileDark);
+      } else {
+        setProfileImg(isMobileResize ? profileLightMobile : profileLight);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [theme]);
+
+  return (
+    <section
+      id="home"
+      aria-labelledby="home-heading"
+      className="scroll-mt-20 flex flex-col items-center text-center px-6 pt-10 pb-16 gap-4"
+    >
+      {/* Intro */}
+      <h1 id="home-heading" className="text-3xl font-extrabold">
+        {t("sections.home.introStart")}{" "}
+        <span className="text-(--color-text-secondary)">Jerry Hernandez</span>
+      </h1>
+
+      {/* Hero tagline */}
+      <p className="text-xl font-medium text-(--color-text-tertiary)">
+        {t("sections.home.heroTagline")}
+      </p>
+
+      {/* Profile image */}
+      <img
+        src={profileImg}
+        alt="Jerry profile picture"
+        className="w-80 h-80 md:w-120 md:h-120"
+      />
+
+      {/* Divider at the bottom of Home section */}
+      <SectionDivider />
+    </section>
+  );
+}

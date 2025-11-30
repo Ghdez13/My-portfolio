@@ -46,27 +46,23 @@
 
   "sections": {
     "home": {
-      "heading": "Welcome to Jerry.dev",
-      "description": "Building robust, scalable backend systems with Java, Spring Boot, and microservices architecture."
+      "introStart": "Greetings, I'm",
+      "heroTagline": "Backend by design, curious in every layer.",
+      "description": "I build scalable backend systems (mainly in Java) and I'm intentionally expanding into frontend to craft better user experiences and more complete digital products."
     },
     "about": {
-      "heading": "About Me",
       "description": "I’m a backend developer specializing in Java, Spring Boot, RESTful APIs, and distributed systems."
     },
     "experience": {
-      "heading": "Experience",
       "description": "Explore my journey in backend development, from enterprise Java applications to cloud-native microservices."
     },
     "technologies": {
-      "heading": "Technologies",
       "description": "Languages, frameworks, and tools I use to build secure, scalable, and maintainable backend systems."
     },
     "project": {
-      "heading": "Projects",
       "description": "A showcase of backend projects including microservices, API gateways, and cloud deployments."
     },
     "contact": {
-      "heading": "Contact Me",
       "description": "Let’s collaborate — reach out to discuss backend solutions, system architecture, or technical consulting."
     }
   }

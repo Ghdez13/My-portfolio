@@ -27,6 +27,8 @@ html:not(.theme-ready) * {
   --color-text-navbar: #ffffff;
   --color-text-primary: #2e2e2e;
   --color-text-secondary: #fbbd35;
+  --color-text-tertiary:#B24449;
+  --color-text-quaternary: #00915D;
 
   --color-hover-text-navbarAndFooter: #d2ad4b;
 
@@ -39,6 +41,8 @@ html:not(.theme-ready) * {
   --color-text-navbar: #fdfdfd;
   --color-text-primary: #e6e6e6;
   --color-text-secondary: #ffb84d;
+   --color-text-tertiary: #C76D70;
+  --color-text-quaternary: #3BB18A;
 
   --color-hover-text-navbarAndFooter: #ffb84d;
 
@@ -178,4 +182,44 @@ body {
 .Toastify__toast--success .Toastify__toast-icon {
   color: var(--color-hover-text-navbarAndFooter) !important;
   background: transparent !important;
+}
+
+
+/* Left: 4-line dashed section divider (alternating colors) */
+.section-divider {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 3rem 0;
+  gap: 7px;
+}
+
+.section-divider .line {
+  width: 100%;
+  border-top: 5px dashed transparent; /* changed from dotted → dashed */
+}
+
+.section-divider .line:nth-child(1),
+.section-divider .line:nth-child(3) {
+  border-color: var(--color-text-secondary);
+}
+
+.section-divider .line:nth-child(2),
+.section-divider .line:nth-child(4) {
+  border-color: var(--color-text-tertiary);
+}
+
+/* Right: 4-line dashed section divider (quaternary only) */
+.section-divider-alt {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 3rem 0;
+  gap: 7px;
+}
+
+.section-divider-alt .line {
+  width: 100%;
+  border-top: 5px dashed transparent; /* also changed here */
+  border-color: var(--color-text-quaternary);
 }
