@@ -8,6 +8,7 @@ html.theme-transition {
 
 html {
   scroll-behavior: smooth;
+  font-family: "Londrina", Arial, sans-serif;
 }
 
 html:not(.theme-ready) * {
@@ -26,9 +27,9 @@ html:not(.theme-ready) * {
 :root {
   --color-text-navbar: #ffffff;
   --color-text-primary: #2e2e2e;
-  --color-text-secondary: #fbbd35;
-  --color-text-tertiary:#B24449;
-  --color-text-quaternary: #00915D;
+  --color-text-secondary: #d2ae4d;
+  --color-text-tertiary: #b24449;
+  --color-text-quaternary: #00915d;
 
   --color-hover-text-navbarAndFooter: #d2ad4b;
 
@@ -41,8 +42,8 @@ html:not(.theme-ready) * {
   --color-text-navbar: #fdfdfd;
   --color-text-primary: #e6e6e6;
   --color-text-secondary: #ffb84d;
-   --color-text-tertiary: #C76D70;
-  --color-text-quaternary: #3BB18A;
+  --color-text-tertiary: #c76d70;
+  --color-text-quaternary: #3bb18a;
 
   --color-hover-text-navbarAndFooter: #ffb84d;
 
@@ -50,8 +51,45 @@ html:not(.theme-ready) * {
   --color-bg-body: #121212;
 }
 
+/* Font family*/
+@font-face {
+  font-family: "Londrina";
+  src: url("/src/assets/fonts/LondrinaSolid-Thin.ttf") format("truetype");
+  font-weight: 100; /*Thin*/
+  font-style: normal;
+}
+@font-face {
+  font-family: "Londrina";
+  src: url("/src/assets/fonts/LondrinaSolid-Light.ttf") format("truetype");
+  font-weight: 300; /*Light*/
+  font-style: normal;
+}
+@font-face {
+  font-family: "Londrina";
+  src: url("/src/assets/fonts/LondrinaSolid-Regular.ttf") format("truetype");
+  font-weight: 400; /*Regular*/
+  font-style: normal;
+}
+@font-face {
+  font-family: "Londrina";
+  src: url("/src/assets/fonts/LondrinaSolid-Black.ttf") format("truetype");
+  font-weight: 900; /*Black*/
+  font-style: normal;
+}
+
+/* outline style Name for --color-text-secondary*/
+.big-outline {
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000;
+}
+
+
+
 .navbar-scroll.navbar-scrolled {
-  background: rgba(51, 111, 163, 0.45); /* same #336fa3 with 45% opacity */
+  background: rgba(51, 111, 163, 0.8); /* same #336fa3 with 45% opacity */
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   transition: background 0.3s ease-in-out;
@@ -59,7 +97,9 @@ html:not(.theme-ready) * {
 
 /* When mobile menu is OPEN, force original SOLID style */
 .navbar-scroll.mobile-open {
-  background: var(--color-bg-navbarAndFooter) !important; /* original theme color */
+  background: var(
+    --color-bg-navbarAndFooter
+  ) !important; /* original theme color */
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   transition: none !important;
@@ -79,10 +119,19 @@ body {
 
 /* Wiggle animation */
 @keyframes wiggle {
-  0%,100% { transform: rotate(0deg); }
-  25% { transform: rotate(-6deg); }
-  50% { transform: rotate(6deg); }
-  75% { transform: rotate(-6deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
+  75% {
+    transform: rotate(-6deg);
+  }
 }
 
 .hover\:wiggle:hover {
@@ -140,7 +189,6 @@ body {
   border-radius: 1px;
 }
 
-
 /* Toast background, text, and border based on your CSS variables */
 .custom-toast {
   background: var(--color-bg-navbarAndFooter) !important;
@@ -184,18 +232,55 @@ body {
   background: transparent !important;
 }
 
+/* Animation profile image*/
+@keyframes rubberHose {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  30% {
+    transform: scale(1.08) rotate(-2deg);
+  }
+  60% {
+    transform: scale(0.95) rotate(2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.rubber-hose {
+  animation: rubberHose 1s ease-out;
+}
+
+/* Animation profile name*/
+@keyframes starburstPop {
+  0% {
+    transform: scale(0.7) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.7) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.starburst-pop {
+  animation: starburstPop 1s ease-out;
+}
 
 /* Left: 4-line dashed section divider (alternating colors) */
 .section-divider {
   display: flex;
   flex-direction: column;
-  width: 100%;
   margin: 3rem 0;
   gap: 7px;
 }
 
 .section-divider .line {
-  width: 100%;
+    width: 100%;
   border-top: 5px dashed transparent; /* changed from dotted → dashed */
 }
 
@@ -213,13 +298,12 @@ body {
 .section-divider-alt {
   display: flex;
   flex-direction: column;
-  width: 100%;
   margin: 3rem 0;
   gap: 7px;
 }
 
 .section-divider-alt .line {
-  width: 100%;
+    width: 100%;
   border-top: 5px dashed transparent; /* also changed here */
   border-color: var(--color-text-quaternary);
 }

@@ -145,7 +145,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
             if (isMobile) setIsOpen(false);
           }}
           aria-label={t(`navbar.alt.${id}`)}
-          className={`relative inline-block w-fit md:text-sm lg:text-xl xl:text-2xl font-semibold transition
+          className={`relative inline-block w-fit md:text-sm lg:text-xl xl:text-2xl font-Light transition
        hover:after:w-full focus:outline-none focus-visible:after:w-full
        after:absolute after:-bottom-1 after:left-0 after:h-1
        after:bg-(--color-hover-text-navbarAndFooter) after:w-0
@@ -208,7 +208,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
         </Tooltip>
 
         {/* Desktop menu */}
-        <nav className="hidden md:flex gap-6" aria-label={t("aria.mainNav")}>
+        <nav className="hidden  md:flex gap-6" aria-label={t("aria.mainNav")}>
           {renderMenuItems()}
         </nav>
 
@@ -219,7 +219,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
         </div>
 
         {/* Mobile menu toggle */}
-        <div className="relative flex flex-col items-center ">
+        <div className="relative flex flex-col  items-center ">
           <button
             ref={toggleButtonRef}
             onClick={() => setIsOpen((prev) => !prev)}
