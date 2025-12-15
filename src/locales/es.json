@@ -88,13 +88,13 @@
       ]
     },
     "technologies": {
-      "description": "Lenguajes, frameworks y herramientas que uso para construir sistemas backend seguros, escalables y mantenibles."
+      "title": "Tecnologías"
     },
-    "project": {
-      "description": "Una muestra de proyectos backend que incluyen microservicios, gateways de API y despliegues en la nube."
+    "projects": {
+      "title": "Proyectos"
     },
     "contact": {
-      "description": "Colaboremos — escríbeme para hablar sobre soluciones backend, arquitectura de sistemas o consultoría técnica."
+      "title": "Contáctame"
     }
   }
 }

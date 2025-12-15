@@ -27,6 +27,7 @@ export function Home({ theme }: HomeProps) {
         <div className="flex flex-col gap-4 text-center md:text-left order-1 md:order-1">
           <h1
             id="home-heading"
+            tabIndex={-1}
             className="text-[45px] md:text-5xl lg:text-8xl font-extrabold text-(--color-text-primary)"
           >
             {t("sections.home.introStart")}{" "}
@@ -54,16 +55,14 @@ export function Home({ theme }: HomeProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="transition-all duration-150 
+                className="motion-press  
         focus:outline-none focus-visible:ring-2 
         focus-visible:ring-[#d2ad4b] rounded-md
-        shadow-(--retro-shadow)
-        hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
-        hover:translate-x-0.5 hover:translate-y-0.5"
+        shadow-(--retro-shadow)"
               >
                 <GitHubIcon
                   className="
-        h-14 w-14 
+       h-13 w-13
         rounded border-2 border-black 
         text-(--color-bg-button)
       "
@@ -78,16 +77,14 @@ export function Home({ theme }: HomeProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="transition-all duration-150 
+                className="motion-press 
         focus:outline-none focus-visible:ring-2 
         focus-visible:ring-[#d2ad4b] rounded-md
-        shadow-(--retro-shadow)
-        hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
-        hover:translate-x-0.5 hover:translate-y-0.5"
+        shadow-(--retro-shadow)"
               >
                 <LinkedInIcon
                   className="
-        h-14 w-14
+         h-13 w-13 
         rounded border-2 border-black 
         text-(--color-bg-button)
       "
@@ -147,12 +144,10 @@ export function Home({ theme }: HomeProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="transition-all duration-150 
+                className="motion-press 
           focus:outline-none focus-visible:ring-2 
           focus-visible:ring-[#d2ad4b] rounded-md
-        shadow-(--retro-shadow)
-        hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
-        hover:translate-x-0.5 hover:translate-y-0.5"
+        shadow-(--retro-shadow)"
               >
                 <GitHubIcon className="h-14 w-14 rounded border-2 border-black text-(--color-bg-button)" />
               </a>
@@ -165,12 +160,10 @@ export function Home({ theme }: HomeProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="transition-all duration-150 
+                className="motion-press  
           focus:outline-none focus-visible:ring-2 
           focus-visible:ring-[#d2ad4b] rounded-md
-        shadow-(--retro-shadow)
-        hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
-        hover:translate-x-0.5 hover:translate-y-0.5"
+        shadow-(--retro-shadow)"
               >
                 <LinkedInIcon className="h-14 w-14 rounded border-2 border-black text-(--color-bg-button) " />
               </a>

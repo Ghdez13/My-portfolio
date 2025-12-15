@@ -24,6 +24,7 @@ export function About({ theme }: AboutProps) {
       {/* Section title*/}
       <h1
         id="about-heading"
+        tabIndex={-1}
         className="w-full text-center text-(--color-text-primary) mb-10 font-extrabold text-[45px] md:text-5xl lg:text-8xl"
       >
         {t("sections.about.aboutTitle", "About Me")}

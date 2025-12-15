@@ -68,30 +68,30 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
   }, [isOpen]);
 
   // IntersectionObserver for active section
-useEffect(() => {
-  const sections = MENU_ITEMS.map((item) =>
-    document.getElementById(item.id)
-  ).filter((el): el is HTMLElement => el !== null);
+  useEffect(() => {
+    const sections = MENU_ITEMS.map((item) =>
+      document.getElementById(item.id)
+    ).filter((el): el is HTMLElement => el !== null);
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-          history.replaceState(null, "", `#${entry.target.id}`);
-        }
-      });
-    },
-    {
-      threshold: 0.3,              // much better for your layout
-      rootMargin: "-80px 0px 0px", // matches your scroll-mt-20 approx
-    }
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+            history.replaceState(null, "", `#${entry.target.id}`);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // much better for your layout
+        rootMargin: "-80px 0px 0px", // matches your scroll-mt-20 approx
+      }
+    );
 
-  sections.forEach((section) => observer.observe(section));
+    sections.forEach((section) => observer.observe(section));
 
-  return () => observer.disconnect();
-}, []);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -131,6 +131,17 @@ useEffect(() => {
     };
   }, []);
 
+  // Ensures focus follows scroll for accessible in-page navigation
+  const focusSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    const heading = section.querySelector<HTMLElement>("h1, h2");
+    heading?.focus({ preventScroll: true });
+  };
+
   const renderMenuItems = (isMobile = false) =>
     MENU_ITEMS.map(({ id, path, label }) => {
       const isActive = activeSection === id;
@@ -140,10 +151,7 @@ useEffect(() => {
           href={path}
           onClick={(e) => {
             e.preventDefault();
-            document.getElementById(id)?.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
+            focusSection(id);
             setActiveSection(id);
             if (isMobile) setIsOpen(false);
           }}
@@ -153,7 +161,11 @@ useEffect(() => {
        after:absolute after:-bottom-1 after:left-0 after:h-1
        after:bg-(--color-hover-text-navbarAndFooter) after:w-0
        after:transition-all after:duration-300
-            ${isActive ? "after:w-full text-(--color-text-navbar)" : "text-(--color-text-navbar)"}`}
+            ${
+              isActive
+                ? "after:w-full text-(--color-text-navbar)"
+                : "text-(--color-text-navbar)"
+            }`}
         >
           {t(label)}
         </a>
@@ -176,7 +188,11 @@ useEffect(() => {
           if (isMobile) setIsOpen(false);
         }}
         className={`relative inline-block text-sm lg:text-2xl transition hover:after:w-full focus:outline-none focus-visible:after:w-full after:absolute after:-bottom-1 after:left-0 after:h-1 after:bg-[#d2ad4b] after:w-0 after:transition-all after:duration-300
-          ${i18n.language === code ? "after:w-full text-(--color-text-navbar)" : "text-(--color-text-navbar)"}`}
+          ${
+            i18n.language === code
+              ? "after:w-full text-(--color-text-navbar)"
+              : "text-(--color-text-navbar)"
+          }`}
       >
         {label}
       </button>
@@ -194,18 +210,15 @@ useEffect(() => {
             to="/"
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById("home")?.scrollIntoView({
-                block: "start",
-                behavior: "smooth",
-              });
+              focusSection("home");
             }}
             aria-label={t("aria.logo")}
-            className="inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg-navbarAndFooter) rounded-md"
+            className="scale-interactive inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] focus-visible:ring-offset-transparent rounded-md"
           >
             <img
               src="/logo/logo.webp"
               alt="Jerry.dev logo"
-              className="h-12 lg:h-15 w-auto transition-transform duration-300 hover:scale-105"
+              className="h-12 lg:h-15 w-auto"
             />
           </Link>
         </Tooltip>
@@ -227,10 +240,10 @@ useEffect(() => {
             ref={toggleButtonRef}
             onClick={() => setIsOpen((prev) => !prev)}
             aria-label="Toggle menu"
-            className="md:hidden p-2 focus:outline-none 
+            className="scale-interactive md:hidden p-2 focus:outline-none 
      focus-visible:ring-2 focus-visible:ring-[#d2ad4b]
-     focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg-navbarAndFooter)
-     relative w-12 h-6 z-60 transition-transform duration-300 hover:scale-105"
+     focus-visible:ring-offset-transparent
+     relative w-12 h-6 z-60"
           >
             <span
               className={`absolute left-0 top-1/2 w-12 h-0.5 bg-white transition-transform duration-300 ease-in-out hover:scale-105
@@ -256,7 +269,7 @@ useEffect(() => {
       {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden fixed inset-0 z-50 flex">
-           {/* Backdrop */}
+          {/* Backdrop */}
           <div className="flex-1 bg-black/50" />
           {/* Drawer */}
           <div

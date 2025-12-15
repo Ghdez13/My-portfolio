@@ -15,6 +15,12 @@ html:not(.theme-ready) * {
   transition: none !important;
 }
 
+h1:focus-visible,
+h2:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
 /* color-variable changes animate smoothly */
 :root,
 [data-theme="light"],
@@ -36,7 +42,7 @@ html:not(.theme-ready) * {
 
   --color-bg-navbarAndFooter: #336fa3;
   --color-bg-button: #336fa3;
-  --color-bg-body: #f5f0e5;
+  --color-bg-body: #f1f0ec;
 
   /* Card color palette*/
   --color-shadow-card-primary: #121212;
@@ -44,7 +50,6 @@ html:not(.theme-ready) * {
   --color-text-card-primary: #3971b8;
   --color-bg-card-secondary: #deaa79;
   --color-text-card-secondary: #335c67;
-
 
   /* retro cartoon button shadow */
   --retro-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
@@ -63,7 +68,7 @@ html:not(.theme-ready) * {
 
   --color-bg-navbarAndFooter: #1f3a56;
   --color-bg-button: #ffb84d;
-  --color-bg-body: #121212;
+  --color-bg-body: #0d1117;
 
   /* Card color palette*/
   --color-shadow-card-primary: #3b3b3b;
@@ -71,7 +76,6 @@ html:not(.theme-ready) * {
   --color-text-card-primary: #c8d69b;
   --color-bg-card-secondary: #1f3a44;
   --color-text-card-secondary: #f0dfc9;
-
 
   /* retro cartoon button shadow */
   --retro-shadow: 4px 4px 0px 0px rgba(255, 184, 77, 0.35);
@@ -165,26 +169,64 @@ body {
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
-/* Wiggle animation */
+/* Wiggle + scale animation for email icon */
 @keyframes wiggle {
-  0%,
-  100% {
-    transform: rotate(0deg);
+  0%, 100% {
+    transform: scale(1.22) rotate(0deg);
   }
   25% {
-    transform: rotate(-6deg);
+    transform: scale(1.22) rotate(-8deg);
   }
   50% {
-    transform: rotate(6deg);
+    transform: scale(1.22) rotate(8deg);
   }
   75% {
-    transform: rotate(-6deg);
+    transform: scale(1.22) rotate(-8deg);
   }
 }
 
-.hover\:wiggle:hover {
-  animation: wiggle 0.4s ease-in-out;
+.motion-wiggle {
+  transition: transform 0.3s ease;
 }
+
+.motion-wiggle:hover,
+.motion-wiggle:focus-visible {
+  animation: wiggle 0.6s ease-in-out;
+}
+
+/* Press / lift interaction (mouse + keyboard) for button and home icons*/
+.motion-press {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.motion-press:hover,
+.motion-press:focus-visible {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-press {
+    transition: none;
+  }
+}
+
+/* Reduced motion for logos and icons */
+.scale-interactive {
+  transition: transform 300ms ease;
+}
+
+.scale-interactive:hover,
+.scale-interactive:focus-visible {
+  transform: scale(1.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scale-interactive {
+    transition: none;
+  }
+}
+
 
 /* Tooltip Style*/
 .tooltip-parent {

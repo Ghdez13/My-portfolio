@@ -10,6 +10,8 @@ import LinkedInIcon from "../assets/icons/linkedin.svg?react";
 export function Footer() {
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState(0);
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   const LANGUAGES = [
     { code: "es", name: "Español" },
@@ -52,6 +54,24 @@ export function Footer() {
     };
   }, [open]);
 
+  // Ensures focus follows scroll for accessible in-page navigation
+  const focusSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    const heading = section.querySelector<HTMLElement>("h1, h2");
+    heading?.focus({ preventScroll: true });
+  };
+
+  //use effect for navigation language selector
+  useEffect(() => {
+    if (open) {
+      itemRefs.current[focusedIndex]?.focus();
+    }
+  }, [focusedIndex, open]);
+
   return (
     <footer className="w-full bg-(--color-bg-navbarAndFooter) text-(--color-text-navbar) shadow-md pt-6">
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 pb-6 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -62,21 +82,19 @@ export function Footer() {
             <Link
               to="/"
               onClick={(e) => {
-                e.preventDefault(); // prevent route navigation
-                document
-                  .getElementById("home") // find your home section
-                  ?.scrollIntoView({ block: "start", behavior: "smooth" }); // scroll to its start
+                e.preventDefault();
+                focusSection("home");
               }}
               aria-label={t("aria.logo")}
-              className="inline-block focus:outline-none
+              className="scale-interactive inline-block focus:outline-none
       focus-visible:ring-2 focus-visible:ring-[#d2ad4b]
-      focus-visible:ring-offset-2 focus-visible:ring-offset-(--color-bg-navbarAndFooter)
+      focus-visible:ring-offset-transparent
       rounded-md"
             >
               <img
                 src="/logo/logo.webp"
                 alt="Jerry.dev logo"
-                className="h-12 lg:h-15 w-auto transition-transform duration-300 hover:scale-105"
+                className="h-12 lg:h-15 w-auto"
               />
             </Link>
           </Tooltip>
@@ -89,12 +107,12 @@ export function Footer() {
             <Tooltip labelKey="footer.tooltipEmail">
               <a
                 href="mailto:gerardo-hernandez03@outlook.com"
-                className="hover:wiggle hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
+                className="motion-wiggle focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
               >
                 <img
                   src="/src/assets/icons/email.webp"
                   alt="Email"
-                  className="h-26 w-26 md:h-32 md:w-32"
+                  className=" h-26 w-26 md:h-32 md:w-32"
                 />
               </a>
             </Tooltip>
@@ -105,7 +123,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
+                className="scale-interactive focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
               >
                 <GitHubIcon className="h-12 w-12 text-(--color-text-secondary)" />
               </a>
@@ -117,7 +135,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="hover:scale-110 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
+                className="scale-interactive focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
               >
                 <LinkedInIcon className="h-12 w-12 text-(--color-text-secondary)" />
               </a>
@@ -140,11 +158,23 @@ export function Footer() {
           <div className="flex flex-col items-left relative">
             {/* Selected language button */}
             <button
+              type="button"
               id="lang"
+              aria-haspopup="listbox"
+              aria-controls="language-listbox"
+              aria-expanded={open ? "true" : "false"} // string used to satisfy static a11y analyzers
               onClick={() => setOpen((prev) => !prev)}
-              className="bg-transparent border border-(--color-hover-text-navbarAndFooter) text-(--color-text-navbar)
-     px-3 py-1 rounded-md text-sm cursor-pointer w-30 flex justify-between items-center
-     focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] relative z-20"
+              onKeyDown={(e) => {
+                if (!open && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+                  e.preventDefault();
+                  setOpen(true);
+                  setFocusedIndex(0);
+                }
+              }}
+              className="bg-transparent border border-(--color-hover-text-navbarAndFooter)
+    text-(--color-text-navbar) px-3 py-1 rounded-md text-sm cursor-pointer
+    w-30 flex justify-between items-center focus:outline-none
+    focus-visible:ring-2 focus-visible:ring-[#d2ad4b] relative z-20"
             >
               {LANGUAGES.find((l) => l.code === i18n.language)?.name}
               <span className="ml-2 text-(--color-text-secondary)">
@@ -160,6 +190,39 @@ export function Footer() {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.25, ease: "easeInOut" }}
+                  id="language-listbox"
+                  role="listbox"
+                  tabIndex={-1}
+                  onKeyDown={(e) => {
+                    switch (e.key) {
+                      case "ArrowDown":
+                        e.preventDefault();
+                        setFocusedIndex((prev) =>
+                          prev < LANGUAGES.length - 1 ? prev + 1 : 0
+                        );
+                        break;
+
+                      case "ArrowUp":
+                        e.preventDefault();
+                        setFocusedIndex((prev) =>
+                          prev > 0 ? prev - 1 : LANGUAGES.length - 1
+                        );
+                        break;
+
+                      case "Escape":
+                        setOpen(false);
+                        break;
+
+                      case "Enter":
+                      case " ":
+                        e.preventDefault();
+                        const lang = LANGUAGES[focusedIndex];
+                        i18n.changeLanguage(lang.code);
+                        localStorage.setItem("preferredLanguage", lang.code);
+                        setOpen(false);
+                        break;
+                    }
+                  }}
                   className="absolute bottom-full left-0 bg-(--color-bg-navbarAndFooter) text-(--color-text-navbar)
                      w-32 border border-(--color-hover-text-navbarAndFooter) rounded-md shadow overflow-hidden z-40"
                   style={{ transformOrigin: "bottom" }}
@@ -186,13 +249,20 @@ export function Footer() {
                     {LANGUAGES.map((lang, index) => (
                       <motion.li
                         key={lang.code}
+                        ref={(el) => {
+                          itemRefs.current[index] = el;
+                        }}
+                        role="option"
+                        aria-selected={focusedIndex === index}
+                        tabIndex={focusedIndex === index ? 0 : -1}
                         variants={{
                           open: { opacity: 1, y: 0 },
                           closed: { opacity: 0, y: 10 },
                         }}
                         transition={{ duration: 0.2 }}
+                        onFocus={() => setFocusedIndex(index)}
                         onClick={() => {
-                          //Change language
+                          // Change language
                           i18n.changeLanguage(lang.code);
                           localStorage.setItem("preferredLanguage", lang.code);
                           setOpen(false);
@@ -211,7 +281,12 @@ export function Footer() {
                             activationMessages[lang.code as "es" | "en" | "fr"]
                           );
                         }}
-                        className="px-3 py-2 cursor-pointer hover:bg-[#fbbd35]/10 select-none"
+                        className={`px-3 py-2 cursor-pointer select-none
+    ${
+      focusedIndex === index
+        ? "bg-[#fbbd35]/20 outline-none"
+        : "hover:bg-[#fbbd35]/10"
+    }`}
                       >
                         {lang.name}
                         {index < LANGUAGES.length - 1 && (

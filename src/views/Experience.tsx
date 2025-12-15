@@ -18,6 +18,7 @@ export function Experience({ theme }: ExperienceProps) {
       {/* Section title */}
       <h1
         id="experience-heading"
+        tabIndex={-1}
         className="w-full text-center text-(--color-text-primary) mb-8 font-extrabold text-[45px] md:text-5xl lg:text-8xl"
       >
         {t("sections.experience.title", "Experience")}

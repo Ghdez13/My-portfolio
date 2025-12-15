@@ -21,10 +21,9 @@ export function RetroButton({
         bg-(--color-bg-button)
         text-(--color-text-button)
 
-        border-4 border-black
+        border-2 border-black
         shadow-(--retro-shadow)
-        hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
-        hover:translate-x-0.5 hover:translate-y-0.5
+        motion-press
 
         active:shadow-none active:translate-x-1 active:translate-y-1
 
