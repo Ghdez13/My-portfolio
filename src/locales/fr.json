@@ -87,16 +87,13 @@
       ]
     },
     "technologies": {
-      "heading": "Technologies",
-      "description": "Langages, frameworks et outils que j'utilise pour construire des systèmes backend sécurisés, évolutifs et maintenables."
+      "title": "Technologies"
     },
-    "project": {
-      "heading": "Projets",
-      "description": "Une vitrine de projets backend incluant microservices, passerelles API et déploiements cloud."
+    "projects": {
+      "title": "Projets"
     },
     "contact": {
-      "heading": "Contactez-moi",
-      "description": "Collaborons — contactez-moi pour discuter de solutions backend, d'architecture système ou de conseil technique."
+      "title": "Me contacter"
     }
   }
 }

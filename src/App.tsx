@@ -36,9 +36,9 @@ function App() {
           <Home theme={theme} />
           <About theme={theme} />
           <Experience theme={theme}/>
-          <Technologies />
-          <Projects />
-          <Contact />
+          <Technologies theme={theme}/>
+          <Projects theme={theme}/>
+          <Contact theme={theme}/>
         </div>
       </main>
 

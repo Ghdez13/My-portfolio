@@ -18,6 +18,7 @@ export function Experience({ theme }: ExperienceProps) {
       {/* Section title */}
       <h1
         id="experience-heading"
+        tabIndex={-1}
         className="w-full text-center text-(--color-text-primary) mb-8 font-extrabold text-[45px] md:text-5xl lg:text-8xl"
       >
         {t("sections.experience.title", "Experience")}
@@ -51,7 +52,7 @@ export function Experience({ theme }: ExperienceProps) {
 
                 {/* Card */}
                 <div
-                  className={`relative w-full md:w-[45%] 
+                  className={`scale-interactive relative w-full md:w-[45%] 
   p-6 pt-14 rounded-2xl 
    ${item.bgClass} 
   shadow-[10px_10px_0_var(--color-shadow-card-primary)]
@@ -60,7 +61,7 @@ export function Experience({ theme }: ExperienceProps) {
                 >
                   {/* Title tag */}
                   <div
-                    className="absolute text-lg lg:text-2xl -top-4 left-4 bg-(--color-shadow-card-primary) 
+                    className="absolute text-lg lg:text-2xl tracking-wider -top-4 left-4 bg-(--color-shadow-card-primary) 
       text-(--color-text-navbar) font-bold px-4 py-1 rounded-xl 
       shadow-md border-4 border-black"
                   >
