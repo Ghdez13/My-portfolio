@@ -41,7 +41,7 @@ export function Experience() {
       </motion.h2>
 
       {/* Timeline wrapper */}
-      <div className="relative w-full max-w-5xl mx-auto">
+      <div className="relative w-full max-w-5xl mx-auto px-6 lg:px-0">
         {/* Vertical center line */}
         <div className="absolute top-0 bottom-0 left-1/2 border-4 border-dashed border-(--color-text-tertiary) opacity-80 transform -translate-x-1/2 pointer-events-none"></div>
 
@@ -87,7 +87,7 @@ export function Experience() {
                   <img
                     src={item.images[theme]}
                     alt={t("sections.experience.imageAlt")}
-                    className="absolute -right-5 -top-12 w-20 h-auto lg:w-30 lg:-right-22 lg:-top-20"
+                    className="absolute -right-4 -top-12 w-20 h-auto md:-right-6 md:w-24 lg:-right-13 lg:-top-20 lg:w-30"
                     draggable="false"
                     loading="lazy"
                   />
