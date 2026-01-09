@@ -308,7 +308,23 @@ export function Footer() {
       {/* Footer separator */}
       <div className="border-t border-(--color-text-navbar)/40 py-4">
         <p className="text-center text-sm">
-          © {new Date().getFullYear()} {t("footer.developer")} Jerry Hernández
+          © {new Date().getFullYear()} {t("footer.developer")}{" "}
+          <a
+            href="https://www.linkedin.com/in/jerry-hernandez-dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+    underline
+    transition-colors
+    hover:text-(--color-text-secondary)
+    focus:outline-none
+    focus:ring-2
+    focus:ring-offset-2
+  "
+            aria-label="Visit Jerry Hernández LinkedIn profile"
+          >
+            Jerry Hernández
+          </a>
         </p>
       </div>
     </footer>

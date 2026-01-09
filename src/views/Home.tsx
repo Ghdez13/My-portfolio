@@ -3,6 +3,8 @@ import { useTheme } from "../components/ThemeContext";
 import { Tooltip } from "../components/Tooltip";
 import { SectionDivider } from "../components/SectionDivider";
 import { RetroButton } from "../components/RetroButton";
+import { motion } from "framer-motion";
+import { heroVariant, titleVariant } from "../animations/retroAnimations";
 import profileLight from "../assets/images/profileLight.webp";
 import profileDark from "../assets/images/profileDark.webp";
 import GitHubIcon from "../assets/icons/heroGithub.svg?react";
@@ -14,26 +16,29 @@ export function Home() {
   const { t } = useTranslation();
 
   return (
-    <section
+    <motion.section
       id="home"
       aria-labelledby="home-heading"
       className="scroll-mt-20 px-6 py-10 min-h-screen flex flex-col justify-center items-center md:items-start"
+      variants={heroVariant}
+      initial="hidden"
+      animate="visible"
     >
       <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
         {/* Text Block */}
-        <div className="flex flex-col gap-4 text-center md:text-left order-1 md:order-1">
-          <h1
+        <div className="flex flex-col gap-4 text-center md:text-left order-1 md:order-1 md:w-[55%]">
+          <motion.h1
             id="home-heading"
             tabIndex={-1}
-            className="text-6xl lg:text-8xl font-extrabold text-(--color-text-primary)"
+            className="text-6xl lg:text-8xl text-start font-extrabold text-(--color-text-primary)"
+            variants={titleVariant}
           >
             {t("sections.home.introStart")}{" "}
             <span className="text-(--color-text-secondary) font-normal big-outline starburst-pop inline-block">
               Jerry Hernández
             </span>
-          </h1>
-
-          <p className="text-[22px] md:text-3xl lg:text-4xl font-medium lg:text-start mt-2 lg:mt-6 text-(--color-text-tertiary)">
+          </motion.h1>
+          <p className="text-[22px] md:text-3xl lg:text-4xl font-medium text-start mt-2 lg:mt-6 text-(--color-text-tertiary)">
             {t("sections.home.heroTagline")}
           </p>
 
@@ -91,7 +96,7 @@ export function Home() {
         </div>
 
         {/* Profile image */}
-        <picture className="order-2 block scale-interactive">
+        <picture className="order-2  scale-interactive md:w-[40%] flex justify-center">
           {/* Desktop image */}
           <source
             media="(min-width: 768px)"
@@ -114,7 +119,6 @@ export function Home() {
             decoding="async"
             draggable="false"
             className="
-      rubber-hose
     object-contain
     w-full
     max-w-[500px]                /* mobile */
@@ -175,6 +179,6 @@ export function Home() {
           altClass="w-[300px] md:w-[340px] lg:w-[375px]"
         />
       </div>
-    </section>
+    </motion.section>
   );
 }

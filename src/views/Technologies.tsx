@@ -3,6 +3,11 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../components/ThemeContext";
 import { SectionDivider } from "../components/SectionDivider";
+import {
+  techSectionVariant,
+  techTitleVariant,
+  techGroupVariant,
+} from "../animations/retroAnimations";
 import FrontendLight from "../assets/images/frontendLight.webp";
 import FrontendDark from "../assets/images/frontendDark.webp";
 import BackendLight from "../assets/images/backendLight.webp";
@@ -126,15 +131,20 @@ export function Technologies() {
   const toolsRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section
+    <motion.section
       id="technologies"
       aria-labelledby="technologies-heading"
       className="scroll-mt-20 px-6 py-[5vh] min-h-[60vh] md:min-h-[70vh] flex flex-col items-center"
+      variants={techSectionVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
     >
       {/* Title */}
-      <h1
+      <motion.h1
         id="technologies-heading"
         tabIndex={-1}
+        variants={techTitleVariant}
         className="
           w-full text-center
           font-extrabold
@@ -143,14 +153,20 @@ export function Technologies() {
         "
       >
         {t("sections.technologies.title", "Technologies")}
-      </h1>
+      </motion.h1>
       {/* Title complement*/}
-      <h2 className="text-4xl lg:text-6xl text-(--color-text-secondary) big-outline mb-20 font-bold starburst-pop">
+      <motion.h2
+        className="text-4xl lg:text-6xl text-(--color-text-secondary) big-outline mb-20 font-bold starburst-pop"
+        variants={techTitleVariant}
+      >
         {t("sections.technologies.titleComplement", "I’ve been working with")}
-      </h2>
+      </motion.h2>
 
       {/* Frontend section */}
-      <div className="w-full flex justify-center mb-5">
+      <motion.div
+        className="w-full flex justify-center mb-5"
+        variants={techGroupVariant}
+      >
         <div className="flex flex-col items-start">
           <h2 className="flex items-center gap-4 text-4xl lg:text-6xl text-(--color-text-tertiary) big-outline mb-1 font-bold">
             Frontend
@@ -183,10 +199,13 @@ export function Technologies() {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Backend section */}
-      <div className="w-full flex justify-center mb-5">
+      <motion.div
+        className="w-full flex justify-center mb-5"
+        variants={techGroupVariant}
+      >
         <div className="flex flex-col items-start">
           <h2 className="flex items-center gap-4 text-4xl lg:text-6xl text-(--color-text-tertiary) big-outline mb-1 font-bold">
             Backend
@@ -216,10 +235,13 @@ export function Technologies() {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Tools section */}
-      <div className="w-full flex justify-center mb-5">
+      <motion.div
+        className="w-full flex justify-center mb-5"
+        variants={techGroupVariant}
+      >
         <div className="flex flex-col items-start">
           <h2 className="flex items-center gap-4 text-4xl lg:text-6xl text-(--color-text-tertiary) big-outline mb-1 font-bold">
             {t("sections.technologies.tools", "Tools")}
@@ -249,7 +271,7 @@ export function Technologies() {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Divider*/}
       <div className="w-full xl:mt-15 ">
@@ -259,6 +281,6 @@ export function Technologies() {
           altClass="w-[300px] md:w-[340px] lg:w-[375px]"
         />
       </div>
-    </section>
+    </motion.section>
   );
 }

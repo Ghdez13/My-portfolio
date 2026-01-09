@@ -29,7 +29,7 @@ export const projects: Project[] = [
       dark: portfolioDark,
     },
     tech: ["React", "TypeScript", "Tailwind"],
-    repoUrl: "https://github.com/Ghdez13/My-portfolio"
+    repoUrl: "https://github.com/Ghdez13/My-portfolio",
   },
   {
     id: 2,

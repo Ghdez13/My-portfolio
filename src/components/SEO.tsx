@@ -64,10 +64,10 @@ export function SEO() {
       <meta name="twitter:title" content={t("meta.title")} />
       <meta name="twitter:description" content={t("meta.description")} />
       <meta name="twitter:image" content={ogImage} />
-      
+
       {/* Replace with my domain */}
       <script type="application/ld+json">
-  {`
+        {`
     {
       "@context": "https://schema.org", 
       "@type": "Person",
@@ -85,8 +85,7 @@ export function SEO() {
       ]
     }
   `}
-</script>
-
+      </script>
     </Helmet>
   );
 }

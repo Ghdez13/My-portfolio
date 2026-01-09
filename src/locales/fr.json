@@ -45,8 +45,7 @@
   "sections": {
     "home": {
       "introStart": "Salut, je suis",
-      "heroTagline": "Développeur Logiciel en train de développer son expérience en Java, Spring Boot et API RESTful",
-      "description": "Je construis des systèmes backend évolutifs (principalement en Java) et je me développe intentionnellement vers le frontend pour créer de meilleures expériences utilisateur et des produits numériques plus complets.",
+      "heroTagline": "Développeur logiciel backend spécialisé en Java, Spring Boot et API REST, créant des systèmes évolutifs tout en s’ouvrant au frontend pour concevoir des produits numériques complets.",
       "cta": "Télécharger CV",
       "tooltipGitHub": "Explore mon GitHub",
       "tooltipLinkedIn": "Visiter mon LinkedIn",
@@ -56,8 +55,8 @@
       "aboutTitle": "À propos de moi",
       "greeting": "L’histoire jusqu’ici:",
       "description": [
-        "De l’industrie du tourisme au développement logiciel, je combine de solides compétences interpersonnelles avec une base technique solide. Travaillant en anglais, espagnol et français, j’ai perfectionné mes capacités de communication, d’empathie et de gestion des conflits.",
-        "Je me concentre actuellement sur Java, Spring Boot et les API RESTful, en développant des systèmes backend fiables, évolutifs et sécurisés, tout en utilisant des outils modernes pour optimiser les flux de travail et contribuer efficacement à des projets à fort impact."
+        "J’ai effectué une transition du secteur du tourisme vers le développement logiciel, en apportant de solides compétences en communication et une vision globale acquise en travaillant en anglais, espagnol et français.",
+        "Je me concentre désormais sur le développement backend, en abordant les problématiques avec une attention particulière portée à l’architecture propre, à la maintenabilité et à la compréhension du fonctionnement des systèmes au-delà du simple fait de les faire fonctionner."
       ],
       "profileAlt": "Avatar de Jerry"
     },
@@ -126,7 +125,7 @@
       "formMaxLength": "Longueur maximale dépassée"
     }
   },
-    "email": {
+  "email": {
     "autoReply": {
       "subject": "Merci de m’avoir contacté !",
       "message": "Bonjour {{name}},\n\nMerci de m’avoir contacté via mon portfolio.\nJ’ai bien reçu votre message et je vous répondrai bientôt.\n\nCordialement,\nJerry"

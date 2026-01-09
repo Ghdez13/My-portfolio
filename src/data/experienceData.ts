@@ -12,7 +12,7 @@ export const experienceData = [
       light: cartoonImage1Light,
       dark: cartoonImage1Dark,
     },
-    bgClass: "card-primary"
+    bgClass: "card-primary",
   },
   {
     year: "2025",
@@ -22,6 +22,6 @@ export const experienceData = [
       light: cartoonImage2Light,
       dark: cartoonImage2Dark,
     },
-    bgClass: "card-secondary"
+    bgClass: "card-secondary",
   },
 ];

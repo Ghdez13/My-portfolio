@@ -28,9 +28,9 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HelmetProvider>
       <Suspense fallback={<Fallback />}>
-        <BrowserRouter> 
-        <ThemeProvider>
-          <App />
+        <BrowserRouter>
+          <ThemeProvider>
+            <App />
           </ThemeProvider>
         </BrowserRouter>
       </Suspense>

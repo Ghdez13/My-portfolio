@@ -6,6 +6,14 @@ import { projects } from "../data/projects";
 import { FilmTape } from "../projects/FilmTape";
 import { Projector } from "../projects/Projector";
 import { ProjectReview } from "../projects/ProjectReview";
+import { motion } from "framer-motion";
+import {
+  projectsSectionVariant,
+  projectsTitleVariant,
+  projectLeftVariant,
+  projectRightVariant,
+  projectTapeVariant,
+} from "../animations/retroAnimations";
 
 export function Projects() {
   const { theme } = useTheme();
@@ -23,31 +31,41 @@ export function Projects() {
     theme === "dark" ? currentProject.images.dark : currentProject.images.light;
 
   return (
-    <section
+    <motion.section
       id="projects"
       className="scroll-mt-20 px-6 py-[5vh] min-h-[60vh] md:min-h-[70vh]"
+      variants={projectsSectionVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
     >
-      <h1 className="text-6xl lg:text-8xl font-extrabold text-(--color-text-primary) mb-10">
+      <motion.h1
+        className="text-6xl lg:text-8xl font-extrabold text-(--color-text-primary) mb-10"
+        variants={projectsTitleVariant}
+      >
         {t("sections.projects.title", "Projects")}
-      </h1>
+      </motion.h1>
 
       <div className="flex flex-col lg:flex-row gap-10 items-center">
-        <div className="w-full lg:w-1/2">
+        <motion.div className="w-full lg:w-1/2" variants={projectLeftVariant}>
           <ProjectReview project={currentProject} />
-        </div>
+        </motion.div>
 
-        <div className="w-full lg:w-1/2 flex justify-center">
+        <motion.div
+          className="w-full lg:w-1/2 flex justify-center"
+          variants={projectRightVariant}
+        >
           <Projector imageSrc={currentImage} />
-        </div>
+        </motion.div>
       </div>
 
-      <div className="mt-16">
+      <motion.div className="mt-16" variants={projectTapeVariant}>
         <FilmTape
           projects={projects}
           currentIndex={currentIndex}
           onSelect={setCurrentIndex}
         />
-      </div>
+      </motion.div>
 
       <div className="w-full xl:mt-15 ">
         <SectionDivider
@@ -56,6 +74,6 @@ export function Projects() {
           altClass="w-[300px] md:w-[340px] lg:w-[375px]"
         />
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -15,11 +15,7 @@ export function Projector({ imageSrc }: ProjectorProps) {
         scale-interactive
       "
     >
-      <img
-        src={imageSrc}
-        alt=""
-        className="w-full h-full object-contain"
-      />
+      <img src={imageSrc} alt="" className="w-full h-full object-contain" />
     </div>
   );
 }

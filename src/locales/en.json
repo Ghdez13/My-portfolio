@@ -47,8 +47,7 @@
   "sections": {
     "home": {
       "introStart": "Hello, I'm",
-      "heroTagline": "Software Developer building experience in Java, Spring Boot & RESTful APIs",
-      "description": "I build scalable backend systems (mainly in Java) and I'm intentionally expanding into frontend to craft better user experiences and more complete digital products.",
+      "heroTagline": "Backend Software Developer specializing in Java, Spring Boot, and RESTful APIs, building scalable systems while expanding into frontend to deliver complete digital products.",
       "cta": "Download CV",
       "tooltipGitHub": "Check out my GitHub",
       "tooltipLinkedIn": "Visit my LinkedIn",
@@ -58,8 +57,8 @@
       "aboutTitle": "About me",
       "greeting": "The story so far:",
       "description": [
-        "From the tourism industry to software development, I combine strong interpersonal skills with a solid technical foundation. Working in English, Spanish, and French, I’ve honed my communication, empathy, and conflict-resolution abilities.",
-        "I’m currently focusing on Java, Spring Boot, and RESTful APIs, building maintainable, scalable, and secure backend systems while leveraging modern tools to optimize workflows and contribute effectively to high-impact projects."
+        "I transitioned from the tourism industry into software development, bringing strong communication skills and a global mindset from working in English, Spanish, and French.",
+        "I now focus on backend development, approaching problems with an emphasis on clean architecture, maintainability, and understanding how systems work beyond just making them function."
       ],
       "profileAlt": "Jerry’s avatar"
     },
@@ -128,7 +127,7 @@
       "formMaxLength": "Maximum length exceeded"
     }
   },
-    "email": {
+  "email": {
     "autoReply": {
       "subject": "Thanks for contacting me!",
       "message": "Hi {{name}},\n\nThanks for reaching out through my portfolio.\nI’ve received your message and will get back to you soon.\n\nBest regards,\nJerry"

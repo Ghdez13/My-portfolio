@@ -33,8 +33,8 @@ export function AutoCloseModal({
         ? emailSuccessDark
         : emailSuccessLight
       : isDark
-        ? emailErrorDark
-        : emailErrorLight;
+      ? emailErrorDark
+      : emailErrorLight;
 
   /* Auto-close after duration */
   useEffect(() => {
@@ -77,9 +77,7 @@ export function AutoCloseModal({
         "
         onClick={(e) => e.stopPropagation()}
       >
-        <p className="text-[20px]">
-          {t(`alerts.${type}`, values)}
-        </p>
+        <p className="text-[20px]">{t(`alerts.${type}`, values)}</p>
 
         <img
           src={statusImage}

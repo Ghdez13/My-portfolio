@@ -2,28 +2,43 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "../components/ThemeContext";
 import { SectionDivider } from "../components/SectionDivider";
 import { experienceData } from "../data/experienceData";
+import { motion } from "framer-motion";
+import {
+  sectionVariant,
+  titleVariant,
+  itemVariant,
+  timelineItemVariant,
+} from "../animations/retroAnimations";
 
 export function Experience() {
   const { theme } = useTheme();
   const { t } = useTranslation();
 
   return (
-    <section
+    <motion.section
       id="experience"
       aria-labelledby="experience-heading"
       className="scroll-mt-20 px-6 py-[5vh] min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center items-center"
+      variants={sectionVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
     >
       {/* Section title */}
-      <h1
+      <motion.h1
         id="experience-heading"
         tabIndex={-1}
         className="w-full text-center text-(--color-text-primary) mb-8 font-extrabold text-6xl lg:text-8xl"
+        variants={titleVariant}
       >
         {t("sections.experience.title", "Experience")}
-      </h1>
-      <h2 className="text-4xl lg:text-6xl text-(--color-text-secondary) big-outline mb-20 font-bold starburst-pop">
+      </motion.h1>
+      <motion.h2
+        className="text-4xl lg:text-6xl text-(--color-text-secondary) big-outline mb-20 font-bold starburst-pop"
+        variants={itemVariant}
+      >
         {t("sections.experience.subtitle", "Things I’ve crafted")}
-      </h2>
+      </motion.h2>
 
       {/* Timeline wrapper */}
       <div className="relative w-full max-w-5xl mx-auto">
@@ -39,11 +54,13 @@ export function Experience() {
             }) as string[];
 
             return (
-              <div
+              <motion.div
                 key={index}
+                custom={isLeft}
                 className={`relative flex flex-col md:flex-row items-center ${
                   isLeft ? "md:justify-start" : "md:justify-end"
                 }`}
+                variants={timelineItemVariant}
               >
                 {/* Dot on the line */}
                 <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-7 h-7 bg-(--color-text-tertiary) border-4 border-(--color-text-primary)  rounded-full z-10"></div>
@@ -70,7 +87,7 @@ export function Experience() {
                   <img
                     src={item.images[theme]}
                     alt={t("sections.experience.imageAlt")}
-                    className="absolute -right-5 -top-12 w-20 h-auto lg:w-30 lg:-right-22 lg:-top-20 rubber-hose"
+                    className="absolute -right-5 -top-12 w-20 h-auto lg:w-30 lg:-right-22 lg:-top-20"
                     draggable="false"
                     loading="lazy"
                   />
@@ -87,7 +104,7 @@ export function Experience() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -101,6 +118,6 @@ export function Experience() {
           altClass="w-[300px] md:w-[340px] lg:w-[375px]"
         />
       </div>
-    </section>
+    </motion.section>
   );
 }

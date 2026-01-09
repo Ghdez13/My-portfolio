@@ -1,11 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "./Tooltip";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ThemeToggleButton } from "./ThemeToggleButton";
-
-
 
 export function Navbar() {
   const { t, i18n } = useTranslation();
@@ -34,7 +31,6 @@ export function Navbar() {
   useEffect(() => {
     document.documentElement.classList.add("theme-ready");
   }, []);
-
 
   // Scroll effects
   useEffect(() => {
@@ -198,34 +194,31 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <Tooltip labelKey="navbar.tooltipLogo">
-          <Link
-            to="/"
-            onClick={(e) => {
-              e.preventDefault();
-              focusSection("home");
-            }}
-            aria-label={t("aria.logo")}
-            className="scale-interactive inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] focus-visible:ring-offset-transparent rounded-md"
-          >
-            <img
-              src="/logo/logo.webp"
-              alt="Jerry.dev logo"
-              className="h-12 lg:h-15 w-auto"
-            />
-          </Link>
-        </Tooltip>
-
+        <Link
+          to="/"
+          onClick={(e) => {
+            e.preventDefault();
+            focusSection("home");
+          }}
+          aria-label={t("aria.logo")}
+          className="scale-interactive inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] focus-visible:ring-offset-transparent rounded-md"
+        >
+          <img
+            src="/logo/logo.webp"
+            alt="Jerry.dev logo"
+            className="h-12 lg:h-15 w-auto"
+          />
+        </Link>
         {/* Desktop menu */}
         <nav className="hidden  md:flex gap-6" aria-label={t("aria.mainNav")}>
           {renderMenuItems()}
         </nav>
 
         {/* Desktop languages + theme */}
-<div className="hidden md:flex items-center gap-3">
-  {renderLanguages()}
-  <ThemeToggleButton />
-</div>
+        <div className="hidden md:flex items-center gap-3">
+          {renderLanguages()}
+          <ThemeToggleButton />
+        </div>
 
         {/* Mobile menu toggle */}
         <div className="relative flex flex-col  items-center ">

@@ -57,26 +57,6 @@
   }
 }
 
-/* Animation profile image*/
-@keyframes rubberHose {
-  0% {
-    transform: scale(1) rotate(0deg);
-  }
-  30% {
-    transform: scale(1.08) rotate(-2deg);
-  }
-  60% {
-    transform: scale(0.95) rotate(2deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
-}
-
-.rubber-hose {
-  animation: rubberHose 1s ease-out;
-}
-
 /* Animation profile name*/
 @keyframes starburstPop {
   0% {

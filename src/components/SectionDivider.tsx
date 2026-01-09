@@ -1,7 +1,7 @@
 interface SectionDividerProps {
-  className?: string;      
-  primaryClass?: string;   
-  altClass?: string;       
+  className?: string;
+  primaryClass?: string;
+  altClass?: string;
 }
 
 export function SectionDivider({
