@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import GitHubIcon from "../assets/icons/github.svg?react";
 import LinkedInIcon from "../assets/icons/linkedin.svg?react";
+import emailIcon from "../assets/icons/email.webp"
 
 export function Footer() {
   const { t, i18n } = useTranslation();
@@ -110,7 +111,7 @@ export function Footer() {
                 className="motion-wiggle focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
               >
                 <img
-                  src="/src/assets/icons/email.webp"
+                  src={emailIcon}
                   alt="Email"
                   className=" h-26 w-26 md:h-32 md:w-32"
                 />
