@@ -136,7 +136,8 @@ export function ContactForm() {
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
-    const { name, value } = e.target;
+    const { name, value } = e.target as HTMLInputElement;
+
 
     let cleanValue = value.replace(/^\s+/, "").replace(/\s{2,}/g, " ");
 
@@ -153,7 +154,8 @@ export function ContactForm() {
   function handleBlur(
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
-    const { name, value } = e.target;
+    const { name, value } = e.target as HTMLInputElement;
+
 
     if (name === "email") {
       setFormData((prev) => ({
