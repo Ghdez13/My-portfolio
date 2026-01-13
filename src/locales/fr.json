@@ -33,7 +33,7 @@
   },
 
   "meta": {
-    "title": "Jerry Hdez | Portfolio",
+    "title": "JerryHdez | Portfolio",
     "description": "Découvrez l'expertise de Jerry en Java, Spring Boot, microservices et architecture backend évolutive."
   },
   "aria": {
@@ -45,7 +45,7 @@
   "sections": {
     "home": {
       "introStart": "Salut, je suis",
-      "heroTagline": "Développeur logiciel backend spécialisé en Java, Spring Boot et API REST, créant des systèmes évolutifs tout en s’ouvrant au frontend pour concevoir des produits numériques complets.",
+      "heroTagline": "Développeur logiciel avec un intérêt principal pour le backend. Je travaille avec Java et Spring Boot tout en explorant le frontend afin de développer des produits numériques complets.",
       "cta": "Télécharger CV",
       "tooltipGitHub": "Explore mon GitHub",
       "tooltipLinkedIn": "Visiter mon LinkedIn",
@@ -55,8 +55,8 @@
       "aboutTitle": "À propos de moi",
       "greeting": "L’histoire jusqu’ici:",
       "description": [
-        "J’ai effectué une transition du secteur du tourisme vers le développement logiciel, en apportant de solides compétences en communication et une vision globale acquise en travaillant en anglais, espagnol et français.",
-        "Je me concentre désormais sur le développement backend, en abordant les problématiques avec une attention particulière portée à l’architecture propre, à la maintenabilité et à la compréhension du fonctionnement des systèmes au-delà du simple fait de les faire fonctionner."
+        "Issu de l’industrie du tourisme, j’ai effectué une transition vers le développement logiciel, où j’ai renforcé mes compétences en communication et développé une vision globale en travaillant en anglais, espagnol et français.",
+        "Aujourd’hui, mon intérêt principal se porte sur le développement backend, avec un accent mis sur l’architecture propre, la maintenabilité et la compréhension du fonctionnement des systèmes au-delà du simple fait de les faire fonctionner."
       ],
       "profileAlt": "Avatar de Jerry"
     },

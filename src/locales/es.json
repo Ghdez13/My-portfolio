@@ -33,7 +33,7 @@
   },
 
   "meta": {
-    "title": "Jerry Hdez | Portfolio",
+    "title": "JerryHdez | Portfolio",
     "description": "Explora la experiencia de Jerry en Java, Spring Boot, microservicios y arquitectura backend escalable."
   },
   "aria": {
@@ -46,7 +46,7 @@
   "sections": {
     "home": {
       "introStart": "Hola, soy",
-      "heroTagline": "Desarrollador de software backend especializado en Java, Spring Boot y APIs REST, creando sistemas escalables mientras amplío mis habilidades en frontend para desarrollar productos digitales completos.",
+      "heroTagline": "Desarrollador de software con interés principal en backend. Trabajo con Java y Spring Boot mientras exploro el frontend para desarrollar productos digitales completos.",
       "cta": "Descargar CV",
       "tooltipLinkedIn": "Visita mi LinkedIn",
       "tooltipGitHub": "Echa un vistazo a mi GitHub",
@@ -56,8 +56,8 @@
       "aboutTitle": "Sobre mí",
       "greeting": "Mi historia hasta ahora:",
       "description": [
-        "Realicé la transición de la industria del turismo al desarrollo de software, aportando sólidas habilidades de comunicación y una mentalidad global adquirida al trabajar en inglés, español y francés.",
-        "Actualmente me enfoco en el desarrollo backend, abordando los problemas con énfasis en la arquitectura limpia, la mantenibilidad y la comprensión de cómo funcionan los sistemas más allá de simplemente hacerlos funcionar."
+        "Vengo de la industria del turismo y realicé una transición al desarrollo de software, donde fortalecí mis habilidades de comunicación y una mentalidad global trabajando en inglés, español y francés.",
+        "Hoy me interesa principalmente el desarrollo backend, con un enfoque en arquitectura limpia, mantenibilidad y en entender cómo funcionan los sistemas más allá de solo hacer que funcionen."
       ],
       "profileAlt": "Avatar de Jerry"
     },

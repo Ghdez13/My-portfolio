@@ -33,7 +33,7 @@
   },
 
   "meta": {
-    "title": "Jerry Hdez | Portfolio",
+    "title": "JerryHdez | Portfolio",
     "description": "Explore Jerry's expertise in Java, Spring Boot, microservices, and scalable backend architecture"
   },
 
@@ -47,7 +47,7 @@
   "sections": {
     "home": {
       "introStart": "Hello, I'm",
-      "heroTagline": "Backend Software Developer specializing in Java, Spring Boot, and RESTful APIs, building scalable systems while expanding into frontend to deliver complete digital products.",
+      "heroTagline": "Software Developer with a primary interest in backend development. I work with Java and Spring Boot while exploring frontend technologies to build complete digital products.",
       "cta": "Download CV",
       "tooltipGitHub": "Check out my GitHub",
       "tooltipLinkedIn": "Visit my LinkedIn",
@@ -57,8 +57,8 @@
       "aboutTitle": "About me",
       "greeting": "The story so far:",
       "description": [
-        "I transitioned from the tourism industry into software development, bringing strong communication skills and a global mindset from working in English, Spanish, and French.",
-        "I now focus on backend development, approaching problems with an emphasis on clean architecture, maintainability, and understanding how systems work beyond just making them function."
+        "I come from the tourism industry and transitioned into software development, where I strengthened my communication skills and developed a global mindset by working in English, Spanish, and French.",
+        "Today, my primary interest is backend development, with a focus on clean architecture, maintainability, and understanding how systems work beyond simply making them function."
       ],
       "profileAlt": "Jerry’s avatar"
     },
