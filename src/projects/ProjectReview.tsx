@@ -29,10 +29,9 @@ export const ProjectReview = ({ project }: ProjectReviewProps) => {
               key={tech}
               className={`
                 px-3 py-1
-                shadow-[4px_4px_0_var(--color-shadow-card-primary)]
                 ${bgClass}
-                border-5 border-black
-                text-lg scale-interactive
+                border-5 rounded-4xl border-black
+                text-lg select-none
               `}
             >
               {tech}

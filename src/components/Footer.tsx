@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import GitHubIcon from "../assets/icons/github.svg?react";
 import LinkedInIcon from "../assets/icons/linkedin.svg?react";
-import emailIcon from "../assets/icons/email.webp"
+import emailIcon from "../assets/icons/email.webp";
 
 export function Footer() {
   const { t, i18n } = useTranslation();
@@ -66,6 +66,12 @@ export function Footer() {
     heading?.focus({ preventScroll: true });
   };
 
+  const handleEmailClick = () => {
+    const user = "gerardo-hernandez03";
+    const domain = "outlook.com";
+    window.location.href = `mailto:${user}@${domain}`;
+  };
+
   //use effect for navigation language selector
   useEffect(() => {
     if (open) {
@@ -106,16 +112,17 @@ export function Footer() {
           <div className="flex items-center gap-6">
             {/* Email Image */}
             <Tooltip labelKey="footer.tooltipEmail">
-              <a
-                href="mailto:gerardo-hernandez03@outlook.com"
-                className="motion-wiggle focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
+              <button
+                onClick={handleEmailClick}
+                className="cursor-pointer motion-wiggle focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d2ad4b] rounded-md"
+                aria-label="Send email"
               >
                 <img
                   src={emailIcon}
                   alt="Email"
-                  className=" h-26 w-26 md:h-32 md:w-32"
+                  className="h-26 w-26 md:h-32 md:w-32"
                 />
-              </a>
+              </button>
             </Tooltip>
             {/* GitHub Icon */}
             <Tooltip labelKey="footer.tooltipGitHub">
@@ -284,10 +291,11 @@ export function Footer() {
                           );
                         }}
                         className={`px-3 py-2 cursor-pointer select-none
-    ${focusedIndex === index
-                            ? "bg-[#fbbd35]/20 outline-none"
-                            : "hover:bg-[#fbbd35]/10"
-                          }`}
+    ${
+      focusedIndex === index
+        ? "bg-[#fbbd35]/20 outline-none"
+        : "hover:bg-[#fbbd35]/10"
+    }`}
                       >
                         {lang.name}
                         {index < LANGUAGES.length - 1 && (

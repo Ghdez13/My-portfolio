@@ -1,0 +1,38 @@
+/* Pagination dots */
+.swiper-pagination {
+  position: absolute;
+  bottom: -20px;
+  width: 100%;
+  text-align: center;
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #336fa3;
+  opacity: 0.35;
+  margin: 0 4px;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+/* Allow pagination to be visible outside swiper */
+.swiper {
+  overflow: visible;
+}
+
+/* Navigation arrows (desktop only) */
+.swiper-button-prev,
+.swiper-button-next {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: flex;
+    color: #000;
+  }
+}

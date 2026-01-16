@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "../components/ThemeContext";
 import { SectionDivider } from "../components/SectionDivider";
 import { projects } from "../data/projects";
-import { FilmTape } from "../projects/FilmTape";
+import { ProjectCarousel } from "../projects/ProjectCarousel";
 import { Projector } from "../projects/Projector";
 import { ProjectReview } from "../projects/ProjectReview";
 import { motion } from "framer-motion";
@@ -60,16 +60,16 @@ export function Projects() {
       </div>
 
       <motion.div className="mt-16" variants={projectTapeVariant}>
-        <FilmTape
+        <ProjectCarousel
           projects={projects}
           currentIndex={currentIndex}
           onSelect={setCurrentIndex}
         />
       </motion.div>
 
-      <div className="w-full xl:mt-15 ">
+      <div className="w-full ">
         <SectionDivider
-          className="justify-start md:justify-start gap-10 md:gap-20"
+          className="justify-start lg:-mt-10 md:justify-start gap-10 md:gap-20"
           primaryClass="w-[500px] md:w-[600px] lg:w-[800px]"
           altClass="w-[300px] md:w-[340px] lg:w-[375px]"
         />

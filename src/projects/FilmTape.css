@@ -9,7 +9,7 @@
 }
 
 .animate-film {
-  animation: film 18s linear infinite;
+  animation: film 10s linear infinite;
   will-change: transform;
 }
 .top-rail {

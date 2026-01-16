@@ -40,6 +40,7 @@ export function RetroButton({
         border-2 border-black
         shadow-(--retro-shadow)
         motion-press
+        cursor-pointer
 
         active:shadow-none active:translate-x-1 active:translate-y-1
 
