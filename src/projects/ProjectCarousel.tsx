@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { useTheme } from "../components/ThemeContext";
+import { useTranslation } from "react-i18next";
 import type { Project } from "../data/projects";
 import { useMemo } from "react";
 import FilmLight from "../assets/images/filmLight.webp";
@@ -22,6 +23,7 @@ export function ProjectCarousel({
   onSelect,
 }: ProjectCarouselProps) {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   // Desktop shows max 3 slides
   const hasHiddenSlidesDesktop = useMemo(
@@ -34,7 +36,7 @@ export function ProjectCarousel({
       {/* Decorative image */}
       <img
         src={theme === "dark" ? FilmDark : FilmLight}
-        alt="Film tape decoration"
+        alt={t("sections.projects.imageAlt", "Filmtape Projects decorative")}
         className="absolute -top-6 lg:-top-10 w-32 h-32 lg:w-42 lg:h-42  select-none scale-interactive "
       />
 
